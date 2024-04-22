@@ -5,7 +5,9 @@ VisualStudioVersion = 17.9.34701.34
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VillaAPIProject", "VillaAPIProject\VillaAPIProject.csproj", "{0D3BD1B5-6B19-45AB-95D7-953B8F80522E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Villa_WebMVC", "Villa_WebMVC\Villa_WebMVC.csproj", "{D7FE42D2-9868-4836-B550-F484B359DC9C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Villa_WebMVC", "Villa_WebMVC\Villa_WebMVC.csproj", "{D7FE42D2-9868-4836-B550-F484B359DC9C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Villa_Utility", "Villa_Utility\Villa_Utility.csproj", "{E5BD3EA4-A960-4ADC-9CF0-85C05AFDBE80}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,6 +33,14 @@ Global
 		{D7FE42D2-9868-4836-B550-F484B359DC9C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D7FE42D2-9868-4836-B550-F484B359DC9C}.Release|x64.ActiveCfg = Release|Any CPU
 		{D7FE42D2-9868-4836-B550-F484B359DC9C}.Release|x64.Build.0 = Release|Any CPU
+		{E5BD3EA4-A960-4ADC-9CF0-85C05AFDBE80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5BD3EA4-A960-4ADC-9CF0-85C05AFDBE80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5BD3EA4-A960-4ADC-9CF0-85C05AFDBE80}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{E5BD3EA4-A960-4ADC-9CF0-85C05AFDBE80}.Debug|x64.Build.0 = Debug|Any CPU
+		{E5BD3EA4-A960-4ADC-9CF0-85C05AFDBE80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5BD3EA4-A960-4ADC-9CF0-85C05AFDBE80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5BD3EA4-A960-4ADC-9CF0-85C05AFDBE80}.Release|x64.ActiveCfg = Release|Any CPU
+		{E5BD3EA4-A960-4ADC-9CF0-85C05AFDBE80}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

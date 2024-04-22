@@ -31,6 +31,9 @@ namespace VillaAPIProject
             CreateMap<VillaNumber,VillaNumberDTO>();
             CreateMap<VillaNumber, VillaNumberUpdateDTO>().ReverseMap();
             CreateMap<VillaNumber, VillaNumberCreateDTO>().ReverseMap();
+
+            //-----------User-----------
+            CreateMap<ApplicationUser, UserDTO>().ReverseMap();
         }
     }
 }

@@ -1,8 +1,53 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@using Microsoft.AspNetCore.Components
+@* import model *@
+@* since it is a list *@
+@model IEnumerable<Villa_WebMVC.Models.Dto.VillaDTO>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+@* change the title *@
+@* @{
+	ViewBag.Title = "Koy Fish V";
+} *@
+
+@* <img class="d-block w-100" style="height: 700px;"  src="images/home/homepage.jpg" alt="" /> *@
+<canvas id="canvas" class="introduceTheme"></canvas>
+
+
+<div class="row" style="--bs-gutter-x:0">
+	@foreach(var villa in Model)
+	{
+		<div class="p-4 col-md-12 col-lg-6">
+			<div class="row" style="border-radius:20px;border: 2px solid grey ">
+				<div class="col-4">
+					<img class="d-block w-100" style="border-radius:20px;padding-top:5px;" asp-append-version="true" src="@villa.ImageUrl" alt="First slide" width="200" height="200" />
+				</div>
+				<div class="col-8">
+					<p class="card-title " style="font-size:xx-large;color:#128494">@villa.Name</p>
+					<p class="card-text">
+						@((MarkupString)villa.Details)
+					</p>
+				</div>
+				<div class="col-12">
+					<div class="row pb-3 pt-2">
+						<div class="col-4">
+						<a href="" class="btn form-control btn-block" style="background-color:#379956;color:whitesmoke">Book</a>
+						</div>
+						<div class="col-4">
+							<span class="">Max Occupancy: @villa.Occupancy adults</span><br />
+							<span class="pt-1">Villa Size: @villa.Sqft Sqft</span><br />
+						</div>
+						<div class="col-4">
+							<span class="text-success float-end font-weight-bold pt-1" style="font-size:25px">Cad
+								<span >@villa.Rate.ToString("c")</span>
+							</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>		
+	}
 </div>
+
+@* import css *@
+<link rel="stylesheet" href="~/css/home/homeIntro.css" type="text/css" />
+@* js import *@
+<script src="~/js/home/homeIntro.js"></script>

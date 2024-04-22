@@ -1,20 +1,28 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using VillaAPIProject.Model;
 
 namespace VillaAPIProject.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) :base(options)
         {
             
         }
-        //-------------------------------------------------------VILLA TABLE +VILLA NUMBER------------------------------------------
+        //--------------USING APPLICATIONUSER UNDER DBCONTEXT
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+
+        //-------------------------------------------------------------------------------------------------
+        public DbSet<LocalUser> LocalUsers { get; set; }
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
         public DbSet<Villa> Villas { get; set; }
         public DbSet<VillaNumber> VillaNumbers { get; set; }
+        //-------------------------------------------------------------------------------------------------
         //seed data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Villa>().HasData(
                 new Villa()
                 {

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 using VillaAPIProject.Data;
 using VillaAPIProject.Model;
@@ -9,13 +10,16 @@ namespace VillaAPIProject.Repository
     public class Repository<T>: IRepository<T> where T: class
     {
         //implement DBContext using dependency injection
-        private readonly ApplicationDbContext _db;
+        private readonly ApplicationDbContext _db;        
+
         //create a DB set to clean up the code instead of uisng _db.Villas
         internal DbSet<T> dbSet;
 
         public Repository(ApplicationDbContext db)
         {
             _db = db;
+            //include Villa Props in VillaNumber
+            //_db.VillaNumbers.Include(u => u.Villa).ToList();
             this.dbSet=_db.Set<T>();
         }
 
@@ -27,7 +31,7 @@ namespace VillaAPIProject.Repository
 
         }
 
-        public async Task<T> GetAsync(Expression<Func<T, bool>> filter = null, bool tracked = true)
+        public async Task<T> GetAsync(Expression<Func<T, bool>> filter = null, bool tracked = true, string? includeProperties = null)
         {
             //use IQueryable
             IQueryable<T> query = dbSet;
@@ -40,16 +44,44 @@ namespace VillaAPIProject.Repository
             {
                 query = query.Where(filter);
             }
+
+            //include Villa props
+            if (includeProperties != null)
+            {
+                foreach (var includeProp in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(includeProp);
+                }
+            }
             return await query.FirstOrDefaultAsync();
         }
 
-        public async Task<List<T>> GetAllAsync(Expression<Func<T, bool>>? filter = null)
+        public async Task<List<T>> GetAllAsync(Expression<Func<T, bool>>? filter = null, string? includeProperties = null,
+            int pageSize = 0, int pageNumber = 1)
         {
-            //use IQueryable
             IQueryable<T> query = dbSet;
+
             if (filter != null)
             {
                 query = query.Where(filter);
+            }
+            if (pageSize > 0)
+            {
+                if (pageSize > 100)
+                {
+                    pageSize = 100;
+                }
+                //skip0.take(5)
+                //page number- 2     || page size -5
+                //skip(5*(1)) take(5)
+                query = query.Skip(pageSize * (pageNumber - 1)).Take(pageSize);
+            }
+            if (includeProperties != null)
+            {
+                foreach (var includeProp in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(includeProp);
+                }
             }
             return await query.ToListAsync();
         }
